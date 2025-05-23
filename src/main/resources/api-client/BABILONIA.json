@@ -1,0 +1,113 @@
+{
+  "name": "BABILONIA",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "ADD SPENT",
+      "filename": "ADD SPENT.bru",
+      "seq": 3,
+      "request": {
+        "url": "{{localhost}}:{{p-default}}/spent",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"userId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"value\": 150.50,\n  \"title\": \"Compras do mês no mercado\",\n  \"type\": \"ALIMENTACAO\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {
+          "res": "bru.setEnvVar(\"user-id\",res.body.userId)"
+        },
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "HELLO",
+      "filename": "HELLO.bru",
+      "seq": 1,
+      "request": {
+        "url": "{{localhost}}:{{p-default}}/spent/hello",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "LIST BY USER-ID",
+      "filename": "LIST BY USER-ID.bru",
+      "seq": 4,
+      "request": {
+        "url": "{{localhost}}:{{p-default}}/spent/all/{{user-id}}",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    }
+  ],
+  "environments": [
+    {
+      "variables": [
+        {
+          "name": "user-id",
+          "value": "id",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        }
+      ],
+      "name": "BABILONIA"
+    }
+  ],
+  "brunoConfig": {
+    "version": "1",
+    "name": "BABILONIA",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "size": 0.000637054443359375,
+    "filesCount": 4
+  }
+}
