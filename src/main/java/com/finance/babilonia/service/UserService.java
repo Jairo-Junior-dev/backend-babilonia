@@ -2,17 +2,22 @@ package com.finance.babilonia.service;
 
 import com.finance.babilonia.controller.request.UserRequest;
 import jakarta.ws.rs.core.Response;
-import lombok.AllArgsConstructor;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
 public class UserService {
 
     private final Keycloak keycloak;
+    private final String realm;
+
+    public UserService(Keycloak keycloak, @Value("${keycloak.realm}") String realm) {
+        this.keycloak = keycloak;
+        this.realm = realm;
+    }
 
     public void addUser(UserRequest userRequest) {
         UserRepresentation userRepresentation = new UserRepresentation();
@@ -20,7 +25,7 @@ public class UserService {
         userRepresentation.setEmail(userRequest.getEmail());
         userRepresentation.setEmailVerified(true);
         userRepresentation.setEnabled(true);
-        Response response = keycloak.realm("master").users().create(userRepresentation);
+        Response response = keycloak.realm(realm).users().create(userRepresentation);
         String userId = response.getLocation().getPath().replaceAll(".*/([^/]+)$", "$1");
 
         CredentialRepresentation passwordCred = new CredentialRepresentation();
@@ -28,7 +33,7 @@ public class UserService {
         passwordCred.setType(CredentialRepresentation.PASSWORD);
         passwordCred.setValue(userRequest.getPassword());
 
-        keycloak.realm("master")
+        keycloak.realm(realm)
                 .users()
                 .get(userId)
                 .resetPassword(passwordCred);
