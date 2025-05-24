@@ -1,4 +1,10 @@
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${AUTHORIZATION_SERVE}
+
   datasource:
     driver-class-name: org.postgresql.Driver
     username: ${USERNAME_DB}
@@ -10,3 +16,13 @@ spring:
       ddl-auto: create-drop
   application:
     name: babilonia
+
+server:
+  port: 8081
+
+keycloak:
+  realm: ${REALM}
+  client-id: ${CLIENT_ID}
+  username: ${USERNAME}
+  password: ${PASSWORD}
+  server-url: ${SERVER_URL}
