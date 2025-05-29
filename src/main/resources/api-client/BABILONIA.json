@@ -8,7 +8,7 @@
       "filename": "ADD SPENT.bru",
       "seq": 3,
       "request": {
-        "url": "{{localhost}}:{{p-default}}/spent",
+        "url": "{{localhost}}:{{p-default-plus-one}}/spent",
         "method": "POST",
         "headers": [],
         "params": [],
@@ -27,7 +27,95 @@
         "tests": "",
         "docs": "",
         "auth": {
-          "mode": "inherit"
+          "mode": "bearer",
+          "bearer": {
+            "token": "{{token-jwt}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "ADD USER",
+      "filename": "ADD USER.bru",
+      "seq": 6,
+      "request": {
+        "url": "{{localhost}}:{{p-default-plus-one}}/user/add",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"username\": \"exemplo3\",\n  \"password\": \"exemplo3\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "{{token-jwt}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "GET-TOKEN",
+      "filename": "GET-TOKEN.bru",
+      "seq": 4,
+      "request": {
+        "url": "http://localhost:8080/realms/master/protocol/openid-connect/token",
+        "method": "POST",
+        "headers": [
+          {
+            "name": "content-type",
+            "value": "application/x-www-form-urlencoded",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "formUrlEncoded",
+          "formUrlEncoded": [
+            {
+              "name": "username",
+              "value": "exemplo3",
+              "enabled": true
+            },
+            {
+              "name": "password",
+              "value": "exemplo3",
+              "enabled": true
+            },
+            {
+              "name": "grant_type",
+              "value": "password",
+              "enabled": true
+            },
+            {
+              "name": "client_id",
+              "value": "spring",
+              "enabled": true
+            }
+          ],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {
+          "res": "bru.setEnvVar(\"token-jwt\",res.body.access_token)"
+        },
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "none"
         }
       }
     },
@@ -37,7 +125,7 @@
       "filename": "HELLO.bru",
       "seq": 1,
       "request": {
-        "url": "{{localhost}}:{{p-default}}/spent/hello",
+        "url": "{{localhost}}:{{p-default-plus-one}}/spent/hello",
         "method": "GET",
         "headers": [],
         "params": [],
@@ -53,7 +141,10 @@
         "tests": "",
         "docs": "",
         "auth": {
-          "mode": "inherit"
+          "mode": "bearer",
+          "bearer": {
+            "token": "{{token-jwt}}"
+          }
         }
       }
     },
@@ -85,6 +176,7 @@
       }
     }
   ],
+  "activeEnvironmentUid": "N77Y4dh2gEu2wMEXDjBje",
   "environments": [
     {
       "variables": [
@@ -107,7 +199,7 @@
       "node_modules",
       ".git"
     ],
-    "size": 0.000637054443359375,
-    "filesCount": 4
+    "size": 0.001373291015625,
+    "filesCount": 7
   }
 }
