@@ -26,3 +26,5 @@ keycloak:
   username: ${USERNAME}
   password: ${PASSWORD}
   server-url: ${SERVER_URL}
+springdoc:
+  show-actuator: true

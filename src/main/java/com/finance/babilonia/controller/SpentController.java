@@ -2,6 +2,7 @@ package com.finance.babilonia.controller;
 
 import com.finance.babilonia.model.Spent;
 import com.finance.babilonia.service.SpentService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
