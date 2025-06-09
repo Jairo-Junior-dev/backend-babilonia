@@ -46,7 +46,7 @@
         "params": [],
         "body": {
           "mode": "json",
-          "json": "{\n  \"username\": \"exemplo3\",\n  \"password\": \"exemplo3\"\n}",
+          "json": "{\n  \"username\": \"exemplo13\",\n  \"password\": \"exemplo13\"\n}",
           "formUrlEncoded": [],
           "multipartForm": [],
           "file": []
@@ -57,10 +57,7 @@
         "tests": "",
         "docs": "",
         "auth": {
-          "mode": "bearer",
-          "bearer": {
-            "token": "{{token-jwt}}"
-          }
+          "mode": "none"
         }
       }
     },
@@ -176,7 +173,7 @@
       }
     }
   ],
-  "activeEnvironmentUid": "N77Y4dh2gEu2wMEXDjBje",
+  "activeEnvironmentUid": "4LMIPnk7y3mTeU1NEtB5s",
   "environments": [
     {
       "variables": [
@@ -199,7 +196,7 @@
       "node_modules",
       ".git"
     ],
-    "size": 0.001373291015625,
+    "size": 0.00133514404296875,
     "filesCount": 7
   }
 }
