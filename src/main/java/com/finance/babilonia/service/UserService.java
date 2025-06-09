@@ -8,6 +8,9 @@ import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -37,5 +40,10 @@ public class UserService {
                 .users()
                 .get(userId)
                 .resetPassword(passwordCred);
+    }
+
+    public void changePassword(String email) {
+        List<UserRepresentation> userRepresentations = keycloak.realm(realm).users().searchByEmail(email, true);
+        keycloak.realm(realm).users().get(userRepresentations.getFirst().getId()).executeActionsEmail(Collections.singletonList("UPDATE_PASSWORD"));
     }
 }
