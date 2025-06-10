@@ -38,20 +38,22 @@
       "type": "http",
       "name": "ADD USER",
       "filename": "ADD USER.bru",
-      "seq": 6,
+      "seq": 7,
       "request": {
-        "url": "{{localhost}}:{{p-default-plus-one}}/user/add",
+        "url": "{{localhost}}:{{p-default-plus-one}}/api/user/add",
         "method": "POST",
         "headers": [],
         "params": [],
         "body": {
           "mode": "json",
-          "json": "{\n  \"username\": \"exemplo13\",\n  \"password\": \"exemplo13\"\n}",
+          "json": "{\n  \"username\": \"alexxx\",\n  \"password\": \"alexxx\",\n  \"email\": \"alexrozaestudos@gmail.com\"\n}",
           "formUrlEncoded": [],
           "multipartForm": [],
           "file": []
         },
-        "script": {},
+        "script": {
+          "res": "bru.setEnvVar(\"email\",req.body.email)\nbru.setEnvVar(\"username\",req.body.username)\nbru.setEnvVar(\"password\",req.body.password)"
+        },
         "vars": {},
         "assertions": [],
         "tests": "",
@@ -82,12 +84,12 @@
           "formUrlEncoded": [
             {
               "name": "username",
-              "value": "exemplo3",
+              "value": "{{username}}",
               "enabled": true
             },
             {
               "name": "password",
-              "value": "exemplo3",
+              "value": "{{password}}",
               "enabled": true
             },
             {
@@ -171,15 +173,72 @@
           "mode": "inherit"
         }
       }
+    },
+    {
+      "type": "http",
+      "name": "RESET PASS",
+      "filename": "RESET PASS.bru",
+      "seq": 6,
+      "request": {
+        "url": "{{localhost}}:{{p-default-plus-one}}/api/user/change-password",
+        "method": "PATCH",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"email\": \"alexrozaestudos@gmail.com\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {
+          "res": "bru.setEnvVar(\"email\",req.body.email)\nbru.setEnvVar(\"username\",req.body.username)\nbru.setEnvVar(\"password\",req.body.password)"
+        },
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
     }
   ],
-  "activeEnvironmentUid": "4LMIPnk7y3mTeU1NEtB5s",
+  "activeEnvironmentUid": "NSgyDhobXhsgDKpvYU7yj",
   "environments": [
     {
       "variables": [
         {
           "name": "user-id",
           "value": "id",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "token-jwt",
+          "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhVnhYQkJwOHF6TVBqNURVY3hFNDNrMjU5Y3lDOTFMY0tzMXNvYzJvZzlRIn0.eyJleHAiOjE3NDk1MDQ1OTMsImlhdCI6MTc0OTQ2ODU5MywianRpIjoib25ydHJvOjEyYzFiYTM5LTU3YzMtNDcwOC1hMGNhLTYyNjYwNTI5MWRlNCIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MC9yZWFsbXMvbWFzdGVyIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjJjYTdjYzE3LTk0M2UtNDE5Ni04MTkwLTUyMmM5NWUyMzBlYiIsInR5cCI6IkJlYXJlciIsImF6cCI6InNwcmluZyIsInNpZCI6Ijg2ZjIwZmJhLWYwMTEtNDQ5NC1iYzU5LTRlMWFkYjZlNGI0ZCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtbWFzdGVyIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoic3ByaW5nIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiZXhlbXBsbzExMSIsImVtYWlsIjoiYWxleHJvemEyNUBnbWFpbC5jb20ifQ.EnlWqTEdfQzd19uqeiLlJ38uSY7ymmcnj_6F1hcRSvrUcf99bUqKVX9p_5sCf9Xd0uyAG_O0D9vnSXeB6RJAnKxaZojgKP00-pCjz_P_Xec9-2P3hgItndNWuh_VZeaL9LQVTUgSi4nXcZpkrhMGfzvDHknbUKURhXTHRpfgj04mlHsrxClfjfCfRON28QgDR9PAJ5kKL8l7N8cdiBZXUry_tDf--4BR0Xn5pVS2oevkW7XDXgFbyYvMbcJmuAuWy6N1oxIbTb0oRpjp3qE5EFNplc9zgkLdIs83J_WAIpjp91X85bqhBGmWNY6K6xS-gCmSLsHD4JBSq-oJ6gUU1w",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "username",
+          "value": "username",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "password",
+          "value": "password",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "email",
+          "value": "email",
           "enabled": true,
           "secret": false,
           "type": "text"
@@ -196,7 +255,7 @@
       "node_modules",
       ".git"
     ],
-    "size": 0.00133514404296875,
-    "filesCount": 7
+    "size": 0.003162384033203125,
+    "filesCount": 8
   }
 }
