@@ -1,5 +1,6 @@
 package com.finance.babilonia.service;
 
+import com.finance.babilonia.config.handle.exceptions.LoginException;
 import com.finance.babilonia.controller.request.UserRequest;
 import jakarta.ws.rs.core.Response;
 import org.keycloak.admin.client.Keycloak;
@@ -28,7 +29,13 @@ public class UserService {
         userRepresentation.setEmail(userRequest.getEmail());
         userRepresentation.setEmailVerified(true);
         userRepresentation.setEnabled(true);
+
         Response response = keycloak.realm(realm).users().create(userRepresentation);
+
+        if (String.valueOf(response.getStatus()).charAt(0) == '4' || String.valueOf(response.getStatus()).charAt(0) == '5') {
+            throw new LoginException(response.getStatus(),"Erro ao criar a conta");
+        }
+
         String userId = response.getLocation().getPath().replaceAll(".*/([^/]+)$", "$1");
 
         CredentialRepresentation passwordCred = new CredentialRepresentation();
