@@ -1,4 +1,21 @@
 services:
+#  backend:
+#    image: alexroza/spring-app
+#    depends_on:
+#      - postgres
+#      - keycloak
+#    environment:
+#      URL_DB: jdbc:postgresql://postgres:5432/postgres
+#      USERNAME_DB: alex
+#      PASSWORD_DB: alex
+#      AUTHORIZATION_SERVE: http://keycloak:8080/realms/master
+#      REALM: master
+#      CLIENT_ID: spring
+#      USERNAME: admin
+#      PASSWORD: admin
+#      SERVER_URL: http://keycloak:8080/
+#    ports:
+#      - "8081:8081"
   postgres:
     image: postgres:latest
     environment:
