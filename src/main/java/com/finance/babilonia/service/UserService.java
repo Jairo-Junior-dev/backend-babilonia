@@ -35,8 +35,11 @@ public class UserService {
         if (String.valueOf(response.getStatus()).charAt(0) == '4' || String.valueOf(response.getStatus()).charAt(0) == '5') {
             throw new LoginException(response.getStatus(),"Erro ao criar a conta");
         }
-
-        String userId = response.getLocation().getPath().replaceAll(".*/([^/]+)$", "$1");
+        //400
+        //500
+        String userId = response.getLocation().
+                getPath().
+                replaceAll(".*/([^/]+)$", "$1");
 
         CredentialRepresentation passwordCred = new CredentialRepresentation();
         passwordCred.setTemporary(false);

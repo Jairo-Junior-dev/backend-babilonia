@@ -1,10 +1,13 @@
 package com.finance.babilonia.controller;
 
+
+import com.finance.babilonia.controller.request.SpentRequest;
 import com.finance.babilonia.model.Spent;
 import com.finance.babilonia.service.SpentService;
-import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,13 +26,26 @@ public class SpentController {
     }
 
     @PostMapping
-    public ResponseEntity<Spent> postSpent(@RequestBody Spent spent) {
-        return ResponseEntity.ok(spentService.addSpent(spent));
+    public ResponseEntity<SpentRequest> postSpent(@RequestBody Spent spent, @AuthenticationPrincipal Jwt jwt) {
+        return ResponseEntity.ok().body(spentService.addSpent(spent, jwt));
     }
 
-    @GetMapping("all/{userId}")
-    public ResponseEntity<List<Spent>> getAllUserSpent(@PathVariable UUID userId) {
-        return ResponseEntity.ok(spentService.listAllUserSpent(userId));
+    @GetMapping(path = "all")
+    public ResponseEntity<List<SpentRequest>> getAllUserSpent(@AuthenticationPrincipal Jwt jwt) {
+        return ResponseEntity.ok(spentService.listAllUserSpent(jwt));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void>deleteSpentById(@AuthenticationPrincipal Jwt jwt ,  @PathVariable("id")UUID spentId){
+        spentService.deleteById(spentId, jwt);
+        return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<SpentRequest> updateSpentById(
+            @AuthenticationPrincipal Jwt jwt,
+            @PathVariable("id") UUID spentId,
+            @RequestBody SpentRequest request) {
+        SpentRequest updated = spentService.updateById(request, spentId, jwt);
+        return ResponseEntity.ok(updated);
     }
 
 }

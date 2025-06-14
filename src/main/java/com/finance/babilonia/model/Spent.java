@@ -1,9 +1,7 @@
 package com.finance.babilonia.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CurrentTimestamp;
 
 import java.math.BigDecimal;
@@ -14,8 +12,10 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
+@ToString
+@EqualsAndHashCode
 public class Spent {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
