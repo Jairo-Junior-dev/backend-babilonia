@@ -1,6 +1,6 @@
 services:
 #  backend:
-#    image: alexroza/spring-app
+#    image: alexroza/backend-babilonia
 #    depends_on:
 #      - postgres
 #      - keycloak

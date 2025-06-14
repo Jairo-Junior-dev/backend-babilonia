@@ -33,8 +33,8 @@ jobs:
             --build-arg USERNAME=${{ secrets.USERNAME }} \
             --build-arg PASSWORD=${{ secrets.PASSWORD }} \
             --build-arg SERVER_URL=${{ secrets.SERVER_URL }} \
-            -t ${{ secrets.DOCKER_USERNAME }}/spring-app:latest .
+            -t ${{ secrets.DOCKER_USERNAME }}/backend-babilonia:latest .
 
       - name: Push da imagem para o Docker Hub
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/spring-app:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/backend-babilonia:latest
