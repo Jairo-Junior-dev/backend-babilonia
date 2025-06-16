@@ -52,4 +52,13 @@ public class SpentService {
         }
         spentRepository.deleteById(spentId);
     }
+    public SpentRequest findById( UUID uuid , Jwt jwt){
+        UUID userId = UUID.fromString((String) jwt.getClaim("sub") );
+        Spent spent = spentRepository.findById(uuid)
+                .orElseThrow(() -> new SpentNotFoundException(HttpStatus.SC_NOT_FOUND,"Spent not found"));;
+        if (!spent.getUserId().equals(userId)) {
+            throw new RuntimeException("You are not allowed to delete this spent.");
+        }
+        return mapper.entityToDTO(spent);
+    }
 }

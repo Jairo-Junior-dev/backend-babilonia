@@ -29,8 +29,11 @@ public class SpentController {
     public ResponseEntity<SpentRequest> postSpent(@RequestBody Spent spent, @AuthenticationPrincipal Jwt jwt) {
         return ResponseEntity.ok().body(spentService.addSpent(spent, jwt));
     }
-
-    @GetMapping(path = "all")
+    @GetMapping("{id}")
+    public  ResponseEntity<SpentRequest> findSpentById( @PathVariable("id") UUID uuid ,@AuthenticationPrincipal Jwt jwt) {
+        return  ResponseEntity.ok().body(spentService.findById(uuid,jwt));
+    }
+    @GetMapping("all")
     public ResponseEntity<List<SpentRequest>> getAllUserSpent(@AuthenticationPrincipal Jwt jwt) {
         return ResponseEntity.ok(spentService.listAllUserSpent(jwt));
     }
