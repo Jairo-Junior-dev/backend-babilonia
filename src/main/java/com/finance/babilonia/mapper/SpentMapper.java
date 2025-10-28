@@ -9,13 +9,11 @@ import org.mapstruct.MappingTarget;
 import java.util.UUID;
 
 @Mapper(componentModel = "spring")
-public interface SpentMapper extends  GenericMapper<Spent, SpentRequest, UUID>{
+public interface SpentMapper extends GenericMapper<Spent, SpentRequest, UUID> {
+    @Mapping(target = "uuid", ignore = true)
+    @Mapping(target = "userId", ignore = true)
 
-    @Mapping(target = "uuid" ,ignore = true)
-    @Mapping( target = "userId", ignore = true)
-    void updateEntityToDTO(SpentRequest request, @MappingTarget Spent spent);
-
-    @Mapping(source = "uuid" , target ="uuid" )
-    SpentRequest  entityToDTO(Spent spent);
+    void updateEntityFromDTO(SpentRequest request, @MappingTarget Spent spent);
+    SpentRequest entityToDTO(Spent spent);
+    Spent dtoToEntity(SpentRequest spentRequest);
 }
-

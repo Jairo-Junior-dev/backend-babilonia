@@ -20,13 +20,8 @@ public class SpentController {
 
     private final SpentService spentService;
 
-    @GetMapping("hello")
-    public ResponseEntity<Object> hello() {
-        return ResponseEntity.ok("oi");
-    }
-
     @PostMapping
-    public ResponseEntity<SpentRequest> postSpent(@RequestBody Spent spent, @AuthenticationPrincipal Jwt jwt) {
+    public ResponseEntity<SpentRequest> postSpent(@RequestBody SpentRequest spent, @AuthenticationPrincipal Jwt jwt) {
         return ResponseEntity.ok().body(spentService.addSpent(spent, jwt));
     }
     @GetMapping("{id}")

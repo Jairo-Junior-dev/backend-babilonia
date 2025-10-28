@@ -21,11 +21,12 @@ public class SpentService {
     private final SpentRepository spentRepository;
     private final SpentMapper mapper;
 
-    public SpentRequest addSpent(Spent spent , Jwt jwt) {
-        spent.setUserId(UUID.fromString((String) jwt.getClaim("sub")));
-        return mapper.entityToDTO(spentRepository.save(spent));
+    public SpentRequest addSpent(SpentRequest request, Jwt jwt) {
+        Spent spent = mapper.dtoToEntity(request);
+        spent.setUserId(UUID.fromString(jwt.getClaim("sub")));
+        spent = spentRepository.save(spent);
+        return mapper.entityToDTO(spent);
     }
-
     public List<SpentRequest> listAllUserSpent(Jwt jwt) {
         UUID userId = (UUID.fromString((String) jwt.getClaim("sub")));
         return mapper.
@@ -38,7 +39,7 @@ public class SpentService {
         UUID userId = UUID.fromString(jwt.getClaim("sub"));
         Spent existingSpent = spentRepository.findById(spentId)
                 .orElseThrow(() -> new SpentNotFoundException(HttpStatus.SC_NOT_FOUND, "Spent not found"));
-        mapper.updateEntityToDTO(request, existingSpent);
+        mapper.updateEntityFromDTO(request, existingSpent);
         Spent updated = spentRepository.save(existingSpent);
         return mapper.entityToDTO(updated);
     }

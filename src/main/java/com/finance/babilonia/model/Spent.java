@@ -1,8 +1,9 @@
 package com.finance.babilonia.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CurrentTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -24,7 +25,8 @@ public class Spent {
     private String title;
     @Enumerated(EnumType.STRING)
     private SpentType type;
-    @CurrentTimestamp
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate date;
+
 
 }
