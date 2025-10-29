@@ -62,4 +62,5 @@ public class SpentService {
         }
         return mapper.entityToDTO(spent);
     }
+
 }
